@@ -1,0 +1,244 @@
+@font-face {
+    font-family: 'silkscreen';
+    src: url('./fonts/Silkscreen-Regular.ttf');
+}
+
+*{
+    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.tank{
+    width: 80vmin;
+    height: 80vmin;
+    background: rgba(185, 230, 213, 1);
+    border-radius: 30px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.tank canvas{
+    width: 100%;
+    height: 100%;
+    display:block;
+}
+
+.top{
+    width: 100%;
+    height: 10%;
+    border-radius: 30px 30px 0px 0px;
+    display: flex;
+    padding: 20px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.middle{
+    position: relative;  /* the overlay positions itself relative to this, not the tank */
+    width: 100%;
+}
+
+.water{
+    width: 100%;
+    display: block; /* ensures image takes up full width & no gap */
+}
+
+.plants{
+    position: absolute;  /* overlay on top of water */
+    bottom: 0;  /* align to bottom of middle section */
+    width: 100%;
+    display: block; /* ensures image takes up full width & no gap */
+}
+
+
+.fish-layer {
+  position: absolute; /* stacked on top of each other */
+  width: 100%;
+  height: 100%;
+  top: -2vmin;
+  left: 0;
+  transition: opacity 0.5s ease-in-out; /* FIXED: smooth fade duration */
+}
+
+.fishingrod{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-in-out forwards;  /* fades in when it appears */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fact-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(12, 20, 62, 0.5); 
+}
+
+.fact-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  border: 0.4vmin solid #3e8d9c;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  height: 70%;
+}
+
+.fact-text {
+  font-size: clamp(0.8rem, 2vmin, 1.2rem); /* responsive font size */
+  color: #3e8d9c;
+  margin-bottom: 10px;
+  font-family: 'silkscreen', sans-serif;
+}
+
+.fact-image {
+    width: 20vmin; /* responsive width */
+    display:block;
+    margin: 1vmin auto 3vmin auto; /* centers the image and adds bottom margin */
+    border-width: 0.4vmin;
+    border-style: solid;
+    border-color: #3e8d9c;
+    border-radius: 20px;
+}
+
+.fact-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5vmin; /* space between buttons */
+    align-items: left;
+    font-family: 'silkscreen', sans-serif;
+}
+
+.exit{
+    background-color:rgba(62, 141, 156, 0.3);
+    flex: 1;
+    max-width: 240px;
+    color: #3e8d9c;
+    border: none;
+    padding: 10px 20px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 4px 2px;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 30px;
+    border: 0.4vmin solid #3e8d9c;
+    /*clamp(min, preferred, max)*/
+    font-size: clamp(0.4rem, 1.8vmin, 1rem);
+    padding: clamp(4px, 0.5vmin, 10px) clamp(10px, 10vmin, 30px);
+    margin-right: clamp(4px, 10vmin, 10px);
+    font-family: 'silkscreen', sans-serif;
+}
+
+.fish-anotha {
+    background-color: #3e8d9c;
+    flex:1;
+    max-width: 240px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 4px 2px;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 30px;
+    /*clamp(min, preferred, max)*/
+    font-size: clamp(0.4rem, 1.8vmin, 1rem);
+    padding: clamp(4px, 1vmin, 10px) clamp(8px, 4vmin, 30px);
+}
+
+.bottom{
+    height: auto;
+    display: flex;
+    flex-direction: row;  /* left to right */
+    justify-content: space-between;
+    align-items: center; /* center vertically */
+    padding-top: 3vmin;
+    padding-bottom: 3vmin;
+    margin-left: 3vmin;
+    margin-right: 3vmin;
+}
+
+.left-column{
+    display: inline-flex; /*div hugs content */
+    flex-direction: column; /* stack items vertically */
+    align-self: center; /*hug content (needed bc it is inside .bottom container) */
+    width: fit-content; /* hug & shrink to text width */
+}
+
+/* Responsive font sizes for left column text */
+.left-column h6 {
+  font-size: clamp(0.5rem, 4vmin, 1.4rem);  /* scales with screen, never too small or too big */
+  font-family: 'silkscreen', sans-serif;
+}
+
+.left-column p {
+  font-size: clamp(0.6rem, 2vmin, 1rem);  /* scales with screen, never too small or too big */
+  font-family: 'silkscreen', sans-serif;
+}
+
+.right-column {
+    flex: 1;  /* fills all remaining space between the two columns */
+    margin-left: 10vmin;  /* breathing room from the text */
+    display: flex;  /* allows centering of button */
+    justify-content: flex-end;  /* aligns button to the right */
+}
+
+.button {
+    background-color: #3e8d9c;
+    width: 100%;
+    max-width: 240px;
+    color: white;
+    border: solid 0.4vmin #8fc9d4;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 4px 2px;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 30px;
+    /*clamp(min, preferred, max)*/
+    font-size: clamp(0.6rem, 2.5vmin, 1rem);
+    padding: clamp(4px, 20vmin, 10px) clamp(8px, 2vmin, 20px);
+    font-family: 'silkscreen', sans-serif;
+}
